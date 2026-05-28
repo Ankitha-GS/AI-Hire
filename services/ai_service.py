@@ -1,11 +1,14 @@
+
 import google.generativeai as genai
+import os
 
-genai.configure(api_key="AIzaSyDCbAKKos6dFrSHc3-fHsVlH9Jv6vv0LLw")
+genai.configure(
+    api_key=os.getenv("GEMINI_API_KEY")
+)
 
-
-model = genai.GenerativeModel("gemini-pro")
-
-
+model = genai.GenerativeModel(
+    "models/gemini-2.0-flash"
+)
 
 def analyze_resume(resume_text, jd_text):
 
@@ -31,3 +34,4 @@ def analyze_resume(resume_text, jd_text):
     response = model.generate_content(prompt)
 
     return response.text
+
