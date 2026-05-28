@@ -6,14 +6,17 @@ genai.configure(
     api_key=os.getenv("GEMINI_API_KEY")
 )
 
-model = genai.GenerativeModel(
-    "models/gemini-1.5-flash-latest"
-)
+# WORKING STABLE MODEL
+model = genai.GenerativeModel("gemini-1.0-pro")
 
 def analyze_resume(resume_text, jd_text):
 
+    # LIMIT TOKENS
+    resume_text = resume_text[:3000]
+    jd_text = jd_text[:2000]
+
     prompt = f"""
-    Analyze the following resume against the job description.
+    Compare this resume with the job description.
 
     Resume:
     {resume_text}
@@ -22,16 +25,20 @@ def analyze_resume(resume_text, jd_text):
     {jd_text}
 
     Return:
-    1. Detected Job Role
-    2. ATS Score out of 100
-    3. Matching Skills
-    4. Missing Skills
-    5. Suggestions for improvement
-
-    Give clean formatted response.
+    1. ATS Score
+    2. Matching Skills
+    3. Missing Skills
+    4. Suggestions
+    5. Detected Role
     """
 
-    response = model.generate_content(prompt)
+    try:
 
-    return response.text
+        response = model.generate_content(prompt)
+
+        return response.text
+
+    except Exception as e:
+
+        return f"Error: {str(e)}"
 
