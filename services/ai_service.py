@@ -2,7 +2,10 @@ import google.generativeai as genai
 
 genai.configure(api_key="AIzaSyDCbAKKos6dFrSHc3-fHsVlH9Jv6vv0LLw")
 
-model = genai.GenerativeModel("gemini-1.5-flash")
+
+model = genai.GenerativeModel("gemini-pro")
+
+
 
 def analyze_resume(resume_text, jd_text):
 
