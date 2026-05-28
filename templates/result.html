@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Hello {{name}}</h2>
+
+    <hr>
+
+    <h3>Detected Skills</h3>
+
+    <ul>
+
+        {% for skill in skills %}
+
+            <li>{{skill}}</li>
+
+        {% endfor %}
+
+    </ul>
+
+    <hr>
+
+    <h3>ATS Score</h3>
+
+    <h2>{{ats_score}}%</h2>
+
+    <hr>
+
+    <h3>Missing Skills</h3>
+
+    <ul>
+
+        {% for skill in missing_skills %}
+
+            <li>{{skill}}</li>
+
+        {% endfor %}
+
+    </ul>
+
+    <hr>
+
+    <h3>Suggestions To Improve Resume</h3>
+
+    <ul>
+
+        {% for suggestion in suggestions %}
+
+            <li>{{suggestion}}</li>
+
+        {% endfor %}
+
+    </ul>
+
+    <hr>
+
+    <h3>Recommended Jobs</h3>
+
+    <ul>
+
+        {% for job in recommended_jobs %}
+
+            <li>{{job}}</li>
+
+        {% endfor %}
+
+    </ul>
+
+    <hr>
+
+    <h3>Job Match Score</h3>
+
+    <h2>{{job_match_score}}%</h2>
+
+    <hr>
+
+    <h3>Missing Keywords For This Job</h3>
+
+    <ul>
+
+        {% for keyword in missing_keywords %}
+
+            <li>{{keyword}}</li>
+
+        {% endfor %}
+
+    </ul>
+
+    <hr>
+
+    <a href="/dashboard">
+
+        <button>View Dashboard</button>
+
+    </a>
+
+</div>
+
+</body>
+
+</html>

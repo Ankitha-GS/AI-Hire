@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Candidate Dashboard</h2>
+
+    <table border="1" width="100%">
+
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Skills</th>
+            <th>ATS Score</th>
+        </tr>
+
+        {% for user in users %}
+
+        <tr>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.skills}}</td>
+            <td>{{user.ats_score}}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>
