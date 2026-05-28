@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://ai-hire-hihg.onrender.com/register -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Register</title>
+
+    <link rel="stylesheet" href="./upload_files/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>AI Hire - Resume Analyzer</h2>
+
+    <form action="https://ai-hire-hihg.onrender.com/upload" method="POST" enctype="multipart/form-data">
+
+        <input type="text" name="name" placeholder="Enter Your Name" required="">
+
+        <input type="email" name="email" placeholder="Enter Your Email" required="">
+
+        <br><br>
+
+        <label><b>Upload Resume (PDF)</b></label>
+
+        <input type="file" name="resume" required="">
+
+        <br><br>
+
+        <label><b>Paste Job Description</b></label>
+
+        <textarea name="job_description" rows="10" placeholder="Paste job description here..." style="width:100%; padding:10px;">        </textarea>
+
+        <br><br>
+
+        <button type="submit">
+
+            Analyze Resume
+
+        </button>
+
+    </form>
+
+</div>
+
+
+
+</body></html>
