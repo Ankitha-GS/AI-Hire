@@ -56,67 +56,80 @@ def register():
 
 def upload():
 
-    # GET FORM DATA
+    try:
 
-    name = request.form['name']
+        # GET FORM DATA
 
-    email = request.form['email']
+        name = request.form['name']
 
-    job_description = request.form['job_description']
+        email = request.form['email']
 
-    # GET FILE
+        job_description = request.form['job_description']
 
-    file = request.files['resume']
+        # GET FILE
 
-    filename = secure_filename(file.filename)
+        file = request.files['resume']
 
-    filepath = os.path.join(
-        app.config['UPLOAD_FOLDER'],
-        filename
-    )
+        filename = secure_filename(file.filename)
 
-    # SAVE FILE
+        filepath = os.path.join(
+            app.config['UPLOAD_FOLDER'],
+            filename
+        )
 
-    file.save(filepath)
+        # CREATE UPLOADS FOLDER IF NOT EXISTS
 
-    # EXTRACT RESUME TEXT
+        os.makedirs(
+            app.config['UPLOAD_FOLDER'],
+            exist_ok=True
+        )
 
-    resume_text = extract_text_from_pdf(filepath)
+        # SAVE FILE
 
-    # AI ANALYSIS
+        file.save(filepath)
 
-    analysis_result = analyze_resume(
-        resume_text,
-        job_description
-    )
+        # EXTRACT RESUME TEXT
 
-    # SAVE TO DATABASE
+        resume_text = extract_text_from_pdf(filepath)
 
-    user = User(
+        # AI ANALYSIS
 
-        name=name,
+        analysis_result = analyze_resume(
+            resume_text,
+            job_description
+        )
 
-        email=email,
+        # SAVE TO DATABASE
 
-        skills="AI Generated",
+        user = User(
 
-        ats_score=0
-    )
+            name=name,
 
-    db.session.add(user)
+            email=email,
 
-    db.session.commit()
+            skills="AI Generated",
 
-    # RESULT PAGE
+            ats_score=0
+        )
 
-    return render_template(
+        db.session.add(user)
 
-        'result.html',
+        db.session.commit()
 
-        name=name,
+        # RESULT PAGE
 
-        result=analysis_result
-    )
+        return render_template(
+
+            'result.html',
+
+            name=name,
+
+            result=analysis_result
+        )
+
+    except Exception as e:
+
+        return f"Error: {str(e)}"
 
 # DASHBOARD
 
@@ -143,7 +156,6 @@ if __name__ == '__main__':
 
     app.run(
         host='0.0.0.0',
-        port=port,
-        debug=True
+        port=port
     )
 

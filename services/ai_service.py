@@ -2,37 +2,36 @@
 import google.generativeai as genai
 import os
 
-genai.configure(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
+API_KEY = os.getenv("GEMINI_API_KEY")
 
-# WORKING STABLE MODEL
-model = genai.GenerativeModel("gemini-1.0-pro")
+if API_KEY:
+    genai.configure(api_key=API_KEY)
 
 def analyze_resume(resume_text, jd_text):
 
-    # LIMIT TOKENS
-    resume_text = resume_text[:3000]
-    jd_text = jd_text[:2000]
-
-    prompt = f"""
-    Compare this resume with the job description.
-
-    Resume:
-    {resume_text}
-
-    Job Description:
-    {jd_text}
-
-    Return:
-    1. ATS Score
-    2. Matching Skills
-    3. Missing Skills
-    4. Suggestions
-    5. Detected Role
-    """
-
     try:
+
+        model = genai.GenerativeModel("gemini-pro")
+
+        resume_text = resume_text[:3000]
+        jd_text = jd_text[:2000]
+
+        prompt = f"""
+        Compare this resume with the job description.
+
+        Resume:
+        {resume_text}
+
+        Job Description:
+        {jd_text}
+
+        Return:
+        1. ATS Score
+        2. Matching Skills
+        3. Missing Skills
+        4. Suggestions
+        5. Detected Role
+        """
 
         response = model.generate_content(prompt)
 
@@ -40,5 +39,5 @@ def analyze_resume(resume_text, jd_text):
 
     except Exception as e:
 
-        return f"Error: {str(e)}"
+        return f"AI Error: {str(e)}"
 
