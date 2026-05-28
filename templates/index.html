@@ -1,20 +1,87 @@
+
 <!DOCTYPE html>
 <html>
+
 <head>
+
     <title>AI Hire</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
 </head>
+
 <body>
 
 <div class="container">
 
     <h1>AI Hire</h1>
 
-    <a href="/register">
-        <button>Get Started</button>
-    </a>
+    <h3>Universal AI ATS Resume Analyzer</h3>
+
+    <br>
+
+    <form
+        action="/upload"
+        method="POST"
+        enctype="multipart/form-data"
+    >
+
+        <input
+            type="text"
+            name="name"
+            placeholder="Enter Your Name"
+            required
+        >
+
+        <br><br>
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter Your Email"
+            required
+        >
+
+        <br><br>
+
+        <label>Upload Resume</label>
+
+        <br><br>
+
+        <input
+            type="file"
+            name="resume"
+            required
+        >
+
+        <br><br>
+
+        <label>Paste Job Description</label>
+
+        <br><br>
+
+        <textarea
+            name="job_description"
+            rows="10"
+            cols="60"
+            placeholder="Paste Job Description Here"
+            required
+        ></textarea>
+
+        <br><br>
+
+        <button type="submit">
+            Analyze Resume
+        </button>
+
+    </form>
 
 </div>
 
 </body>
+
 </html>
+

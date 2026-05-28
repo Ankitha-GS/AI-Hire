@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Result</title>
+    <title>AI Hire Result</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
@@ -14,95 +14,42 @@
 
 <div class="container">
 
+    <h1>AI Hire</h1>
+
     <h2>Hello {{name}}</h2>
 
     <hr>
 
-    <h3>Detected Skills</h3>
+    <h2>AI Resume Analysis Result</h2>
 
-    <ul>
+    <br>
 
-        {% for skill in skills %}
+    <pre style="
+        text-align: left;
+        white-space: pre-wrap;
+        font-size: 16px;
+        line-height: 1.6;
+    ">
+{{ result }}
+    </pre>
 
-            <li>{{skill}}</li>
+    <br><br>
 
-        {% endfor %}
+    <a href="/">
 
-    </ul>
+        <button>
+            Analyze Another Resume
+        </button>
 
-    <hr>
+    </a>
 
-    <h3>ATS Score</h3>
-
-    <h2>{{ats_score}}%</h2>
-
-    <hr>
-
-    <h3>Missing Skills</h3>
-
-    <ul>
-
-        {% for skill in missing_skills %}
-
-            <li>{{skill}}</li>
-
-        {% endfor %}
-
-    </ul>
-
-    <hr>
-
-    <h3>Suggestions To Improve Resume</h3>
-
-    <ul>
-
-        {% for suggestion in suggestions %}
-
-            <li>{{suggestion}}</li>
-
-        {% endfor %}
-
-    </ul>
-
-    <hr>
-
-    <h3>Recommended Jobs</h3>
-
-    <ul>
-
-        {% for job in recommended_jobs %}
-
-            <li>{{job}}</li>
-
-        {% endfor %}
-
-    </ul>
-
-    <hr>
-
-    <h3>Job Match Score</h3>
-
-    <h2>{{job_match_score}}%</h2>
-
-    <hr>
-
-    <h3>Missing Keywords For This Job</h3>
-
-    <ul>
-
-        {% for keyword in missing_keywords %}
-
-            <li>{{keyword}}</li>
-
-        {% endfor %}
-
-    </ul>
-
-    <hr>
+    <br><br>
 
     <a href="/dashboard">
 
-        <button>View Dashboard</button>
+        <button>
+            View Dashboard
+        </button>
 
     </a>
 
@@ -111,3 +58,4 @@
 </body>
 
 </html>
+

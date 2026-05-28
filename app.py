@@ -1,11 +1,10 @@
+
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 
-from resume_parser import extract_skills
-from ats import calculate_ats
-from jobs import recommend_jobs
-from matcher import match_resume_to_job
+from services.pdf_parser import extract_text_from_pdf
+from services.ai_service import analyze_resume
 
 import os
 
@@ -76,24 +75,18 @@ def upload():
         filename
     )
 
+    # SAVE FILE
+
     file.save(filepath)
 
-    # EXTRACT SKILLS
+    # EXTRACT RESUME TEXT
 
-    skills = extract_skills(filepath)
+    resume_text = extract_text_from_pdf(filepath)
 
-    # ATS SCORE
+    # AI ANALYSIS
 
-    ats_score, missing_skills, suggestions = calculate_ats(skills)
-
-    # JOB RECOMMENDATION
-
-    recommended_jobs = recommend_jobs(skills)
-
-    # JOB MATCHING
-
-    job_match_score, missing_keywords = match_resume_to_job(
-        skills,
+    analysis_result = analyze_resume(
+        resume_text,
         job_description
     )
 
@@ -105,9 +98,9 @@ def upload():
 
         email=email,
 
-        skills=", ".join(skills),
+        skills="AI Generated",
 
-        ats_score=ats_score
+        ats_score=0
     )
 
     db.session.add(user)
@@ -122,19 +115,7 @@ def upload():
 
         name=name,
 
-        skills=skills,
-
-        ats_score=ats_score,
-
-        missing_skills=missing_skills,
-
-        suggestions=suggestions,
-
-        recommended_jobs=recommended_jobs,
-
-        job_match_score=job_match_score,
-
-        missing_keywords=missing_keywords
+        result=analysis_result
     )
 
 # DASHBOARD
@@ -159,4 +140,10 @@ if __name__ == '__main__':
         db.create_all()
 
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+
+    app.run(
+        host='0.0.0.0',
+        port=port,
+        debug=True
+    )
+
