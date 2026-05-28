@@ -7,7 +7,7 @@ genai.configure(
 )
 
 model = genai.GenerativeModel(
-    "models/gemini-2.0-flash"
+    "models/gemini-1.5-flash-latest"
 )
 
 def analyze_resume(resume_text, jd_text):
