@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE = "http://localhost:8000";
+const BASE = "https://ai-hire-backend.onrender.com";
 
 export async function extractResume(file) {
   const form = new FormData();
