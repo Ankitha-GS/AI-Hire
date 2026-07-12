@@ -6,13 +6,13 @@ An end-to-end AI recruitment tool that matches resumes to job descriptions with 
 
 ## Features
 
-- 📄 Upload resume PDF → AI extracts structured profile (skills, experience, education)
-- 💼 Paste any job description → AI extracts requirements
-- 🤖 ATS score simulation — keyword hit rate, format issues, recommendations
-- 📊 Semantic rubric scoring across 5 dimensions (not just keyword overlap)
-- 🔍 Gap analysis with narrative explanation
-- ✨ AI-generated resume improvement suggestions + rewritten summary
-- 👥 Recruiter dashboard with candidate ranking
+- Upload resume PDF → AI extracts structured profile (skills, experience, education)
+- Paste any job description → AI extracts requirements
+- ATS score simulation — keyword hit rate, format issues, recommendations
+- Semantic rubric scoring across 5 dimensions (not just keyword overlap)
+-  Gap analysis with narrative explanation
+-  AI-generated resume improvement suggestions + rewritten summary
+-  Recruiter dashboard with candidate ranking
 
 ## Tech Stack
 
